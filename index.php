@@ -30,7 +30,7 @@ function truncate($text, $ending = '...') {
             <div class="container-md">
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <p>Voulez vous vraiment supprimer <strong><?= $coursNameToDelete ?></strong> ?</p>
-                    <a href="?delete<?= $_GET['idCours'] ?>" class="btn btn-outline-danger">Confirmer</a>
+                    <a href="?delete=<?= $_GET['idCours'] ?>" class="btn btn-outline-danger">Confirmer</a>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>
@@ -128,10 +128,6 @@ function truncate($text, $ending = '...') {
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <?php
-                            $type = getCoursType($cour['idType']);
-                            ?>
-                            <span class="badge bg-primary"><?= $type['libelle'] ?></span>
                         </div>
                         <div class="card-footer d-flex justify-content-around">
                             <input type="submit" value="Valider" class="btn btn-primary" />
