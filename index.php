@@ -2,8 +2,9 @@
 
 $title = "Catalogue de cours";
 
-include'partials/header.php';
-require'request/catalogue.dao.php';
+include 'partials/header.php';
+require 'request/catalogue.dao.php';
+require 'services/imageService.php';
 
 $cours = getCours();
 $types = getTypes();
@@ -37,6 +38,8 @@ function truncate($text, $ending = '...') {
         <?php }
         if(isset($_GET['delete']))
         {
+            $imageToDelete = getImageToDelete($_GET['delete']);
+            deleteImage("asset/img/", $imageToDelete);
             $success = deleteCours($_GET['delete']);
             if($success){ ?>
                 <div class="container-md">
@@ -56,7 +59,19 @@ function truncate($text, $ending = '...') {
         }
         // MODIFICATION
         if(isset($_POST['type']) && $_POST['type'] == 'modificationEtape2'){
-            $success = updateCours($_POST['idCours'], $_POST['nomCours'], $_POST['descCours'], $_POST['idType']);
+            $newImageName = "";
+            if($_FILES['imageCours']['name'] != ""){
+                $imageToDelete = getImageToDelete($_POST['idCours']);
+                deleteImage("assets/img/", $imageToDelete);
+                $fileImage = $_FILES['imageCours'];
+                $directory = __DIR__."/assets/img/";
+                try{
+                    $newImageName = ajoutImage($fileImage, $directory, str_replace(' ', '-', strtolower($_POST['libelle'])));
+                }catch(Exception $e){
+                    echo $e->getMessage();
+                }
+            }
+            $success = updateCours($_POST['idCours'], $_POST['nomCours'], $_POST['descCours'], $_POST['idType'], $newImageName);
             if($success){ ?>
                 <div class="container-md">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -110,6 +125,10 @@ function truncate($text, $ending = '...') {
                         <input type="hidden" name="idCours" value="<?= $cour['idCours'] ?>">
                         <img src="assets/img/<?= $cour['image'] ?>" class="card-img-top img-fluid" alt="<?= $cour['libelle'] ?>">
                         <div class="card-body">
+                            <div class="form-group">
+                                <label for="imageCours">Image du cours :</label>
+                                <input type="file" name="imageCours" id="imageCours" class="form-control-file mt-3">
+                            </div>
                             <div class="form-group">
                                 <label for="nomCours">Nom du cours :</label>
                                 <input type="text" name="nomCours" value="<?= $cour['libelle'] ?>" id="nomCours" class="form-control">

@@ -39,4 +39,8 @@ function ajoutImage($file, $dir, $nom):string
     }
 }
 
+function deleteImage($directory, $nom){
+    unlink($directory.$nom); // on retire le fichier qui se trouve dans le directoire et le nom du fichier
+}
+
 ?>
