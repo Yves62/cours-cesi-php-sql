@@ -28,7 +28,7 @@ function ajoutImage($file, $dir, $nom):string
         throw new RuntimeException("LE fichier existe déjà");
     }
     // On teste que le fichier ne dépasse pas un certain poids
-    if($file['size'] > 50000){
+    if($file['size'] > 500000){
         throw new RuntimeException("Le fichier est trop gros");
     }
     // On teste que l'enregistrement du fichier dans le répertoire souhaité soit fait
