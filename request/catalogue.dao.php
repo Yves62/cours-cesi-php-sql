@@ -54,3 +54,14 @@ function updateCours($idCours,$libelle,$description, $idType){
     $stmt->bindValue(":idType", $idType, PDO::PARAM_INT);
     return $stmt->execute(); // renvoie un boolean
 }
+
+function addCours($libelle,$description, $idType,$image){
+    $dbh = getConnexion();
+    $req = "INSERT INTO cours(libelle,description,idType,image) VALUES (:libelle, :description, :idType, :image )";
+    $stmt = $dbh->prepare($req);
+    $stmt->bindValue(":libelle", $libelle, PDO::PARAM_STR);
+    $stmt->bindValue(":description", $description, PDO::PARAM_STR);
+    $stmt->bindValue(":idType", $idType, PDO::PARAM_INT);
+    $stmt->bindValue(":image", $image, PDO::PARAM_STR);
+    return $stmt->execute(); // renvoie un boolean
+}
