@@ -85,14 +85,8 @@ function truncate($text, $ending = '...') {
                     </div>
                 <?php }else{?>
                     <form class="card mx-auto" style="width: 22rem;height: 40rem" action="" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="type" value="modificationEtape2" />
-                        <input type="hidden" name="idCours" value="<?= $cour['idCours'] ?>" />
                         <img src="assets/img/<?= $cour['image'] ?>" class="card-img-top img-fluid" alt="<?= $cour['libelle'] ?>">
                         <div class="card-body">
-                            <div class="form-group mt-3">
-                                <label for="imageCours">Image du cours :</label>
-                                <input type="file" name="imageCours" id="imageCours" class="form-control-file mt-3" />
-                            </div>
                             <div class="form-group">
                                 <label for="nomCours">Nom du cours :</label>
                                 <input type="text" name="nomCours" value="<?= $cour['libelle'] ?>" id="nomCours" class="form-control">
@@ -101,16 +95,10 @@ function truncate($text, $ending = '...') {
                                 <label for="descCours">Description du cours :</label>
                                 <textarea name="descCours" id="descCours" class="form-control"><?= $cour['description'] ?></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="idType">Type du cours :</label>
-                                <select id="idType" name="idType" class="form-control">
-                                    <?php foreach($types as $type) :?>
-                                        <option value="<?= $type['idType'] ?>" <?= ($type['idType'] === $cour['idType']) ? "selected" : "" ?> >
-                                            <?= $type['libelle'] ?>
-                                        </option>
-                                    <?php endforeach;?>
-                                </select>
-                            </div>
+                            <?php
+                            $type = getCoursType($cour['idType']);
+                            ?>
+                            <span class="badge bg-primary"><?= $type['libelle'] ?></span>
                         </div>
                         <div class="card-footer d-flex justify-content-around">
                             <input type="submit" value="Valider" class="btn btn-primary" />
