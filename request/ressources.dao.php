@@ -40,7 +40,7 @@ function updateRessouces($idRessource,$lien,$libelle,$description,$idType){
 
 function addRessouces($libelle,$lien,$description,$idType){
     $dbh = getConnexion();
-    $req = "INSERT INTO cours(lien, libelle, lien, description,idType,image) VALUES ( :libelle, :lien, :description, :idType, :image )";
+    $req = "INSERT INTO cours(libelle, lien, description,idType) VALUES ( :libelle, :lien, :description, :idType)";
     $stmt = $dbh->prepare($req);
     $stmt->bindValue(":libelle", $libelle, PDO::PARAM_STR);
     $stmt->bindValue(":lien", $lien, PDO::PARAM_STR);
