@@ -73,6 +73,14 @@ function addCours($libelle,$description, $idType,$image){
     return $stmt->execute(); // renvoie un boolean
 }
 
+function addTypeCours($libelle){
+    $dbh = getConnexion();
+    $req = "INSERT INTO type(libelle) VALUES (:libelle)";
+    $stmt = $dbh->prepare($req);
+    $stmt->bindValue(":libelle", $libelle, PDO::PARAM_STR);
+    return $stmt->execute(); // renvoie un boolean
+}
+
 function getImageToDelete($idCours){
     $dbh = getConnexion();
     $req = "SELECT image FROM cours WHERE idCours = :idCours";
