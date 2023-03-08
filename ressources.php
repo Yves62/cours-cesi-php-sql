@@ -1,6 +1,6 @@
 <?php
 
-$title = "Catalogue de cours";
+$title = "Catalogue des ressources";
 
 include 'partials/header.php';
 require 'request/ressources.dao.php';
