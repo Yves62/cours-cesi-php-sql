@@ -11,7 +11,7 @@ $types = getTypes();
 // AJOUT
 if (isset($_POST['libelle'], $_POST['lien'], $_POST['description'], $_POST['idType'])) {
     try{
-        $success = addRessouces($_POST['libelle'],$_POST['lien'], $_POST['description'], $_POST['idType'], $imageName);
+        $success = addRessouces($_POST['libelle'],$_POST['lien'], $_POST['description'], $_POST['idType']);
         if ($success) { ?>
             <div class="container-md">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
