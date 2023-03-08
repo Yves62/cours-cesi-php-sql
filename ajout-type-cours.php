@@ -93,10 +93,10 @@ $types = getTypes();
             <div class="card mx-auto " style="width: 18rem;">
                 <div class="card-body d-flex justify-content-around">
                     <?php
-                    $type = getCoursType($type['idType']);
+                    $typeName = getCoursType($type['idType']);
                     ?>
                     <div class="text-center">
-                        <span class="badge bg-primary"><?= $type['libelle'] ?></span>
+                        <span class="badge bg-primary"><?= $typeName['libelle'] ?></span>
                     </div>
                     <form action="" method="GET">
                         <input type="hidden" name="idType" value="<?= $type['idType'] ?>" />
