@@ -26,13 +26,13 @@ function getSingleType($idType){
     return $stmt->fetch();
 }
 
-function updateRessouces($idRessource,$lien,$libelle,$description,$idType){
+function updateRessouces($idRessource,$libelle,$lien,$description,$idType){
     $dbh = getConnexion();
-    $req = "UPDATE ressources SET lien = :lien, libelle = :libelle, description = :description, idType = :idType WHERE idRessource = :idRessource";
+    $req = "UPDATE ressources SET  libelle = :libelle, lien = :lien, description = :description, idType = :idType WHERE idRessource = :idRessource";
     $stmt = $dbh->prepare($req);
     $stmt->bindValue(":idRessource", $idRessource, PDO::PARAM_INT);
-    $stmt->bindValue(":lien", $lien, PDO::PARAM_STR);
     $stmt->bindValue(":libelle", $libelle, PDO::PARAM_STR);
+    $stmt->bindValue(":lien", $lien, PDO::PARAM_STR);
     $stmt->bindValue(":description", $description, PDO::PARAM_STR);
     $stmt->bindValue(":idType", $idType, PDO::PARAM_INT);
     return $stmt->execute(); // renvoie un boolean

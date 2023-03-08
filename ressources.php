@@ -24,6 +24,29 @@ function truncate($text, $ending = '...')
     </div>
 </div>
 
+<?php
+// MODIFICATION
+if (isset($_POST['type']) && $_POST['type'] == 'modificationEtape2') {
+    $success = updateRessouces($_POST['idRessource'], $_POST['nomRessource'], $_POST['lienRessource'], $_POST['descRessource'], $_POST['idType']);
+    if ($success) { ?>
+        <div class="container-md">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <p>La modification s'est bien déroulée</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    <?php } else { ?>
+        <div class="container-md">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <p>La modification ne s'est pas bien déroulée</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+<?php }
+}
+$ressources = getRessources();
+?>
+
 
 <!-- READ ALL TYPE WITH BTN TO DELETE TYPE AND BTN TO MODIFY -->
 <div class="row no-gutters">
@@ -34,7 +57,7 @@ function truncate($text, $ending = '...')
                 <div class="card mx-auto" style="width: 18rem;height: 30rem">
                     <div class="card-body">
                         <h5 class="card-title"><?= $ressource['libelle'] ?></h5>
-                        <a href="<?= $ressource['lien'] ?>"><?= $ressource['libelle'] ?></a>
+                        <a href="<?= $ressource['lien'] ?>"><?= $ressource['lien'] ?></a>
                         <p class="card-text"><?= truncate($ressource['description']) ?></p>
                         <p class="card-text"><?= $ressource['date'] ?></p>
                         <?php
@@ -42,18 +65,18 @@ function truncate($text, $ending = '...')
                         ?>
                         <span class="badge bg-primary"><?= $type['libelle'] ?></span>
                     </div>
-                    <!-- <div class="card-footer mt-3 d-flex justify-content-around">
-                            <form action="" method="GET">
-                                <input type="hidden" name="idRessource" value="<?= $ressource['idRessource'] ?>" />
-                                <input type="hidden" name="type" value="modification" />
-                                <input type="submit" value="Modifier" class="btn btn-primary" />
-                            </form>
-                            <form action="" method="GET">
-                                <input type="hidden" name="idRessouce" value="<?= $ressource['idRessource'] ?>" />
-                                <input type="hidden" name="type" value="suppression" />
-                                <input type="submit" value="Supprimer" class="btn btn-outline-danger" />
-                            </form>
-                        </div> -->
+                    <div class="card-footer mt-3 d-flex justify-content-around">
+                        <form action="" method="GET">
+                            <input type="hidden" name="idRessource" value="<?= $ressource['idRessource'] ?>" />
+                            <input type="hidden" name="type" value="modification" />
+                            <input type="submit" value="Modifier" class="btn btn-primary" />
+                        </form>
+                        <form action="" method="GET">
+                            <input type="hidden" name="idRessouce" value="<?= $ressource['idRessource'] ?>" />
+                            <input type="hidden" name="type" value="suppression" />
+                            <input type="submit" value="Supprimer" class="btn btn-outline-danger" />
+                        </form>
+                    </div>
                 </div>
             <?php } else { ?>
                 <form class="card mx-auto" style="width: 22rem;height: 40rem" action="" method="POST">
@@ -66,7 +89,7 @@ function truncate($text, $ending = '...')
                         </div>
                         <div class="form-group">
                             <label for="lienRessource">Lien de la ressource :</label>
-                            <input type="text" name="lienRessource" value="<?= $ressource['libelle'] ?>" id="lienRessource" class="form-control">
+                            <input type="text" name="lienRessource" value="<?= $ressource['lien'] ?>" id="lienRessource" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="descRessource">Description de la ressource :</label>
@@ -82,6 +105,10 @@ function truncate($text, $ending = '...')
                                 <?php endforeach; ?>
                             </select>
                         </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-around">
+                        <input type="submit" value="Valider" class="btn btn-primary" />
+                        <input type="submit" value="Annuler" onclick="cancelModification(event)" class="btn btn-outline-danger" />
                     </div>
                 </form>
             <?php }
