@@ -8,9 +8,9 @@ $types = getTypes();
 ?>
 
 <?php
-// AJOUT
+// ALERT CONFIM ADDED TYPE
 if (isset($_POST['libelle'])) {
-    try{
+    try {
         $success = addTypeCours($_POST['libelle']);
         if ($success) { ?>
             <div class="container-md">
@@ -26,11 +26,45 @@ if (isset($_POST['libelle'])) {
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>
-    <?php  }
-    } catch(Exception $e){
+<?php  }
+    } catch (Exception $e) {
         echo $e->getMessage();
     }
 }
+?>
+
+<?php
+// SUPPRESSION
+if (isset($_GET['type']) && $_GET['type'] == 'suppression') {
+    $typeNameToDelete = getTypeNameToDelete($_GET['idType']);
+?>
+    <div class="container-md">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <p>Voulez vous vraiment supprimer <strong><?= $typeNameToDelete ?></strong> ?</p>
+            <a href="?delete=<?= $_GET['idType'] ?>" class="btn btn-outline-danger">Confirmer</a>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+    <?php }
+if (isset($_GET['delete'])) {
+    $success = deleteType($_GET['delete']);
+    if ($success) { ?>
+        <div class="container-md">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <p>La suppression du type s'est bien déroulée</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    <?php } else { ?>
+        <div class="container-md">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <p>La suppression du type ne s'est pas bien déroulée</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+<?php }
+}
+$types = getTypes();
 ?>
 
 <div class="container-md mt-5">
@@ -39,6 +73,7 @@ if (isset($_POST['libelle'])) {
         <p class="h3">Bienvenue sur la page d'ajout d'un type de cours</p>
         <a class="btn btn-outline-light btn-lg" href="index.php">Retourner à l'accueil</a>
     </div>
+    <!-- FORM TO ADDED TYPE -->
     <div class="mt-5 w-75 mx-auto">
         <form action="" method="POST" enctype="multipart/form-data">
             <div class="form-group">
@@ -50,6 +85,29 @@ if (isset($_POST['libelle'])) {
     </div>
 </div>
 
-<?php
-include 'partials/footer.php';
-?>
+<!-- READ ALL TYPE WITH BTN TO DELETE TYPE -->
+<div class="row no-gutters">
+    <h2 class="text-center my-4">Voici la liste de nos types de cours</h2>
+    <?php foreach ($types as $type) : ?>
+        <div class="col-md-4 mt-5">
+            <div class="card mx-auto " style="width: 18rem;">
+                <div class="card-body d-flex justify-content-around">
+                    <?php
+                    $type = getCoursType($type['idType']);
+                    ?>
+                    <div class="text-center">
+                        <span class="badge bg-primary"><?= $type['libelle'] ?></span>
+                    </div>
+                    <form action="" method="GET">
+                        <input type="hidden" name="idType" value="<?= $type['libelle'] ?>" />
+                        <input type="hidden" name="type" value="suppression" />
+                        <input type="submit" value="Supprimer" class="btn btn-outline-danger" />
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    <?php endforeach; ?>
+    <?php
+    include 'partials/footer.php';
+    ?>

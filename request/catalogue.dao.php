@@ -44,6 +44,24 @@ function deleteCours($idCours){
     return $stmt->execute(); // renvoie un boolean
 }
 
+function getTypeNameToDelete($idType){
+    $dbh = getConnexion();
+    $req = 'SELECT CONCAT(idType, " : ", libelle) AS monType FROM type WHERE idType = :idType ';
+    $stmt = $dbh->prepare($req);
+    $stmt->bindValue(":idType", $idType, PDO::PARAM_INT);
+    $stmt->execute();
+    $res = $stmt->fetch();
+    if ($res) return $res['monType'];
+}
+
+function deleteType($idType){
+    $dbh = getConnexion();
+    $req = "DELETE FROM type WHERE idType = :idType";
+    $stmt = $dbh->prepare($req);
+    $stmt->bindValue(":idType", $idType, PDO::PARAM_INT);
+    return $stmt->execute(); // renvoie un boolean
+}
+
 function updateCours($idCours,$libelle,$description, $idType, $nomImage){
     $dbh = getConnexion();
     $req = "UPDATE cours SET libelle = :libelle, description = :description, idType = :idType";
