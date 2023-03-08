@@ -49,21 +49,21 @@ $ressources = getRessources();
 
 <?php
 // SUPPRESSION
-        if(isset($_GET['type']) && $_GET['type'] === 'suppression')
+        if(isset($_GET['type']) && $_GET['type'] == 'suppression')
         {
-            $coursNameToDelete = getCoursNameToDelete($_GET['idCours']);
+            $ressourceNameToDelete = getRessourceNameToDelete($_GET['idRessource']);
             ?>
             <div class="container-md">
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <p>Voulez vous vraiment supprimer <strong><?= $coursNameToDelete ?></strong> ?</p>
-                    <a href="?delete=<?= $_GET['idCours'] ?>" class="btn btn-outline-danger">Confirmer</a>
+                    <p>Voulez vous vraiment supprimer <strong><?= $ressourceNameToDelete ?></strong> ?</p>
+                    <a href="?delete=<?= $_GET['idRessource'] ?>" class="btn btn-outline-danger">Confirmer</a>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>
         <?php }
         if(isset($_GET['delete']))
         {
-            $success = deleteCours($_GET['delete']);
+            $success = deleteRessouce($_GET['delete']);
             if($success){ ?>
                 <div class="container-md">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -80,6 +80,7 @@ $ressources = getRessources();
                 </div>
             <?php }
         }
+        $ressources = getRessources();
     ?>
 
 
@@ -107,7 +108,7 @@ $ressources = getRessources();
                             <input type="submit" value="Modifier" class="btn btn-primary" />
                         </form>
                         <form action="" method="GET">
-                            <input type="hidden" name="idRessouce" value="<?= $ressource['idRessource'] ?>" />
+                            <input type="hidden" name="idRessource" value="<?= $ressource['idRessource'] ?>" />
                             <input type="hidden" name="type" value="suppression" />
                             <input type="submit" value="Supprimer" class="btn btn-outline-danger" />
                         </form>

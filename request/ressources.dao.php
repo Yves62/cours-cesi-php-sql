@@ -49,20 +49,20 @@ function addRessouces($libelle,$lien,$description,$idType){
     return $stmt->execute(); // renvoie un boolean
 }
 
-function getRessourceNameToDelete($idRessouce){
+function getRessourceNameToDelete($idRessource){
     $dbh = getConnexion();
-    $req = 'SELECT CONCAT(idRessouce, " : ", libelle) AS maRessource FROM ressources WHERE idRessouce = :idRessouce ';
+    $req = 'SELECT CONCAT(idRessource, " : ", libelle) AS maRessource FROM ressources WHERE idRessource = :idRessource ';
     $stmt = $dbh->prepare($req);
-    $stmt->bindValue(":idRessouce", $idRessouce, PDO::PARAM_INT);
+    $stmt->bindValue(":idRessource", $idRessource, PDO::PARAM_INT);
     $stmt->execute();
     $res = $stmt->fetch();
-    return $res['monCours'];
+    if($res) return $res['maRessource'];
 }
 
-function deleteRessouce($idRessouce){
+function deleteRessouce($idRessource){
     $dbh = getConnexion();
-    $req = "DELETE FROM ressources WHERE idRessouce = :idRessouce";
+    $req = "DELETE FROM ressources WHERE idRessource = :idRessource";
     $stmt = $dbh->prepare($req);
-    $stmt->bindValue(":idRessouce", $idRessouce, PDO::PARAM_INT);
+    $stmt->bindValue(":idRessource", $idRessource, PDO::PARAM_INT);
     return $stmt->execute(); // renvoie un boolean
 }
