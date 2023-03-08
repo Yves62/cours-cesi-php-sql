@@ -33,6 +33,7 @@ if (isset($_POST['libelle'], $_POST['lien'], $_POST['description'], $_POST['idTy
 }
 ?>
 
+<!-- FORM TO ADDED RESSOURCE -->
 <div class="container-md mt-5">
     <div class="h-100 p-5 text-bg-info text-white rounded-3">
         <h1>Création d'un cours</h1>

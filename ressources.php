@@ -115,6 +115,7 @@ $ressources = getRessources();
                     </div>
                 </div>
             <?php } else { ?>
+                <!-- FORM TO MODIFICATION ONE RESSOURCE -->
                 <form class="card mx-auto" style="width: 22rem;height: 40rem" action="" method="POST">
                     <input type="hidden" name="type" value="modificationEtape2">
                     <input type="hidden" name="idRessource" value="<?= $ressource['idRessource'] ?>">
