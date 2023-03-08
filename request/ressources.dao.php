@@ -28,7 +28,7 @@ function getSingleType($idType){
 
 function updateRessouces($idRessource,$lien,$libelle,$description,$idType){
     $dbh = getConnexion();
-    $req = "UPDATE cours SET lien = :lien, libelle = :libelle, description = :description, idType = :idType WHERE idRessource = :idRessource";
+    $req = "UPDATE ressources SET lien = :lien, libelle = :libelle, description = :description, idType = :idType WHERE idRessource = :idRessource";
     $stmt = $dbh->prepare($req);
     $stmt->bindValue(":idRessource", $idRessource, PDO::PARAM_INT);
     $stmt->bindValue(":lien", $lien, PDO::PARAM_STR);
@@ -40,7 +40,7 @@ function updateRessouces($idRessource,$lien,$libelle,$description,$idType){
 
 function addRessouces($libelle,$lien,$description,$idType){
     $dbh = getConnexion();
-    $req = "INSERT INTO cours(libelle, lien, description,idType) VALUES ( :libelle, :lien, :description, :idType)";
+    $req = "INSERT INTO ressources(libelle, lien, description,idType) VALUES ( :libelle, :lien, :description, :idType)";
     $stmt = $dbh->prepare($req);
     $stmt->bindValue(":libelle", $libelle, PDO::PARAM_STR);
     $stmt->bindValue(":lien", $lien, PDO::PARAM_STR);

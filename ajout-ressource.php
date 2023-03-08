@@ -40,13 +40,13 @@ if (isset($_POST['libelle'], $_POST['lien'], $_POST['description'], $_POST['idTy
         <a class="btn btn-outline-light btn-lg" href="index.php">Retourner à l'accueil</a>
     </div>
     <div class="mt-5 w-75 mx-auto">
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST">
             <div class="form-group">
                 <label for="libelle">Nom de la ressource : </label>
                 <input class="form-control mt-3" type="text" name="libelle" id="libelle" placeholder="Saisir le nom de la ressource">
             </div>
             <div class="form-group">
-                <label for="libelle">Lien de la ressource : </label>
+                <label for="lien">Lien de la ressource : </label>
                 <input class="form-control mt-3" type="text" name="lien" id="lien" placeholder="Saisir le lien de la ressource">
             </div>
             <div class="form-group mt-3">
