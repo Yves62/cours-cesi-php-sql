@@ -38,12 +38,12 @@ function updateRessouces($idRessource,$lien,$libelle,$description,$idType){
     return $stmt->execute(); // renvoie un boolean
 }
 
-function addRessouces($lien,$libelle,$description,$idType){
+function addRessouces($libelle,$lien,$description,$idType){
     $dbh = getConnexion();
-    $req = "INSERT INTO cours(lien, libelle,description,idType,image) VALUES (:lien, :libelle, :description, :idType, :image )";
+    $req = "INSERT INTO cours(lien, libelle, lien, description,idType,image) VALUES ( :libelle, :lien, :description, :idType, :image )";
     $stmt = $dbh->prepare($req);
-    $stmt->bindValue(":lien", $lien, PDO::PARAM_STR);
     $stmt->bindValue(":libelle", $libelle, PDO::PARAM_STR);
+    $stmt->bindValue(":lien", $lien, PDO::PARAM_STR);
     $stmt->bindValue(":description", $description, PDO::PARAM_STR);
     $stmt->bindValue(":idType", $idType, PDO::PARAM_INT);
     return $stmt->execute(); // renvoie un boolean

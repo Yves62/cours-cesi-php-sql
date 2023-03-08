@@ -20,6 +20,7 @@ function truncate($text, $ending = '...')
     <div class="h-100 p-5 text-bg-info text-white rounded-3">
         <h1>Catalogue des ressources</h1>
         <p class="h3">Bienvenue sur le site de cours en ligne</p>
+        <a class="btn btn-outline-light btn-lg" href="ajout-ressource.php">Ajouter une ressource</a>
     </div>
 </div>
 

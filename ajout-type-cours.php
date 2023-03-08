@@ -1,5 +1,5 @@
 <?php
-$title = "AJout d'un cours";
+$title = "AJout d'un type de cours";
 
 include 'partials/header.php';
 require 'request/catalogue.dao.php';
@@ -99,7 +99,7 @@ $types = getTypes();
                         <span class="badge bg-primary"><?= $type['libelle'] ?></span>
                     </div>
                     <form action="" method="GET">
-                        <input type="hidden" name="idType" value="<?= $type['libelle'] ?>" />
+                        <input type="hidden" name="idType" value="<?= $type['idType'] ?>" />
                         <input type="hidden" name="type" value="suppression" />
                         <input type="submit" value="Supprimer" class="btn btn-outline-danger" />
                     </form>
