@@ -1,7 +1,0 @@
-Le code commence par définir une variable $title et inclure les fichiers header.php, catalogue.dao.php et imageService.php. Ensuite, deux variables $cours et $types sont définies en appelant les fonctions getCours() et getTypes() de catalogue.dao.php.
-
-Une fonction truncate() est définie pour tronquer un texte si sa longueur dépasse 50 caractères.
-
-Le reste du code traite les requêtes GET et POST envoyées au script. Si la requête GET contient un paramètre type et sa valeur est égale à suppression, une boîte de confirmation est affichée pour demander à l'utilisateur s'il veut vraiment supprimer un cours. Si la requête GET contient un paramètre delete, le cours correspondant est supprimé de la base de données et son image est supprimée du serveur. Si la requête POST contient un paramètre type et sa valeur est égale à modificationEtape2, le cours correspondant est mis à jour avec les valeurs des champs de formulaire et l'image est éventuellement remplacée.
-
-Enfin, le code boucle sur la variable $cours et affiche chaque cours dans une carte Bootstrap.

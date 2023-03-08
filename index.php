@@ -66,7 +66,7 @@ function truncate($text, $ending = '...') {
                 $fileImage = $_FILES['imageCours'];
                 $directory = __DIR__."/assets/img/";
                 try{
-                    $newImageName = ajoutImage($fileImage, $directory, str_replace(' ', '-', strtolower($_POST['libelle'])));
+                    $newImageName = ajoutImage($fileImage, $directory, str_replace(' ', '-', strtolower($_POST['nomCours'])));
                 }catch(Exception $e){
                     echo $e->getMessage();
                 }
