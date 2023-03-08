@@ -26,23 +26,23 @@ function truncate($text, $ending = '...')
 
 
 <!-- READ ALL TYPE WITH BTN TO DELETE TYPE AND BTN TO MODIFY -->
-<?php foreach ($ressources as $ressource) : ?>
-            <div class="col-md-4 mt-5">
-                <?php
-                if(!isset($_GET['type']) || $_GET['type'] != 'modification' || $_GET['idRessource'] != $ressource['idRessource'])
-                {?>
-                    <div class="card mx-auto" style="width: 18rem;height: 30rem">
-                        <div class="card-body">
-                            <h5 class="card-title"><?= $ressource['libelle'] ?></h5>
-                            <a href="<?= $ressource['lien'] ?>"><?= $ressource['libelle'] ?></a>
-                            <p class="card-text"><?= truncate($ressource['description']) ?></p>
-                            <p class="card-text"><?= $ressource['date'] ?></p>
-                            <?php
-                            $type = getSingleType($ressource['idType']);
-                            ?>
-                            <span class="badge bg-primary"><?= $type['libelle'] ?></span>
-                        </div>
-                        <!-- <div class="card-footer mt-3 d-flex justify-content-around">
+<div class="row no-gutters">
+    <?php foreach ($ressources as $ressource) : ?>
+        <div class="col-md-4 mt-5">
+            <?php
+            if (!isset($_GET['type']) || $_GET['type'] != 'modification' || $_GET['idRessource'] != $ressource['idRessource']) { ?>
+                <div class="card mx-auto" style="width: 18rem;height: 30rem">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= $ressource['libelle'] ?></h5>
+                        <a href="<?= $ressource['lien'] ?>"><?= $ressource['libelle'] ?></a>
+                        <p class="card-text"><?= truncate($ressource['description']) ?></p>
+                        <p class="card-text"><?= $ressource['date'] ?></p>
+                        <?php
+                        $type = getSingleType($ressource['idType']);
+                        ?>
+                        <span class="badge bg-primary"><?= $type['libelle'] ?></span>
+                    </div>
+                    <!-- <div class="card-footer mt-3 d-flex justify-content-around">
                             <form action="" method="GET">
                                 <input type="hidden" name="idRessource" value="<?= $ressource['idRessource'] ?>" />
                                 <input type="hidden" name="type" value="modification" />
@@ -54,40 +54,41 @@ function truncate($text, $ending = '...')
                                 <input type="submit" value="Supprimer" class="btn btn-outline-danger" />
                             </form>
                         </div> -->
-                    </div>
-                <?php }else{?>
-                    <form class="card mx-auto" style="width: 22rem;height: 40rem" action="" method="POST" >
-                        <input type="hidden" name="type" value="modificationEtape2">
-                        <input type="hidden" name="idRessource" value="<?= $ressource['idRessource'] ?>">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="nomRessource">Nom de la ressource :</label>
-                                <input type="text" name="nomRessource" value="<?= $ressource['libelle'] ?>" id="nomRessource" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="lienRessource">Lien de la ressource :</label>
-                                <input type="text" name="lienRessource" value="<?= $ressource['libelle'] ?>" id="lienRessource" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="descRessource">Description de la ressource :</label>
-                                <textarea name="descRessource" id="descRessource" class="form-control"><?= $ressource['description'] ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="idType">Type de la ressource :</label>
-                                <select name="idType" id="idType" class="form-control">
-                                    <?php foreach ($types as $type) : ?>
-                                        <option value="<?= $type['idType'] ?>" <?= ($type['idType'] == $ressource['idType']) ? "selected" : "" ?>>
-                                            <?=  $type['libelle'] ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
+                </div>
+            <?php } else { ?>
+                <form class="card mx-auto" style="width: 22rem;height: 40rem" action="" method="POST">
+                    <input type="hidden" name="type" value="modificationEtape2">
+                    <input type="hidden" name="idRessource" value="<?= $ressource['idRessource'] ?>">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="nomRessource">Nom de la ressource :</label>
+                            <input type="text" name="nomRessource" value="<?= $ressource['libelle'] ?>" id="nomRessource" class="form-control">
                         </div>
-                    </form>
-                <?php }
-                ?>
+                        <div class="form-group">
+                            <label for="lienRessource">Lien de la ressource :</label>
+                            <input type="text" name="lienRessource" value="<?= $ressource['libelle'] ?>" id="lienRessource" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="descRessource">Description de la ressource :</label>
+                            <textarea name="descRessource" id="descRessource" class="form-control"><?= $ressource['description'] ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="idType">Type de la ressource :</label>
+                            <select name="idType" id="idType" class="form-control">
+                                <?php foreach ($types as $type) : ?>
+                                    <option value="<?= $type['idType'] ?>" <?= ($type['idType'] == $ressource['idType']) ? "selected" : "" ?>>
+                                        <?= $type['libelle'] ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            <?php }
+            ?>
 
-            </div>
-        <?php endforeach; ?>
+        </div>
+    <?php endforeach; ?>
+    <div class="row no-gutters">
 
-<?php include 'partials/footer.php'; ?>
+        <?php include 'partials/footer.php'; ?>
